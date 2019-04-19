@@ -1,0 +1,120 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use [%models_namespace%]\[%Crud%];
+use Illuminate\Http\Request;
+
+class [%Crud%]Controller extends Controller {
+
+    /**
+     * Get all [%crud_space%]s.
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function index() {
+        $[%crud_var%]s = [%Crud%]::paginate(25);
+
+        return view('[%crud_underscore%].index', compact('[%crud_var%]s'));
+    }
+
+    /**
+     * Show a [%crud_space%] item.
+     *
+     * @param \[%models_namespace%][%Crud%] $[%crud_var%]
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function show([%Crud%] $[%crud_var%]) {
+        return view('[%crud_underscore%].show', compact('[%crud_var%]'));
+    }
+
+    /**
+     * Create a new [%crud_space%] item.
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function create() {
+        return view('[%crud_underscore%].create');
+    }
+
+    /**
+     * Store a new [%crud_space%].
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\RedirectResponse|void
+     */
+    public function store(Request $request) {
+        // Do some validation.
+        $validation = $request->validate($this->_validationRules());
+        if (! $validation) {
+
+            // Return to the create_edit form with errors.
+            return redirect()->back()->withErrors();
+        }
+
+        // Succeed, create the crud.
+        $[%crud_var%] = new [%Crud%]();
+        $[%crud_var%]->title = $request->input('title');
+        $[%crud_var%]->save();
+
+        // Set a confirmation message and return to the overview.
+        return redirect()->route('[%crud_dash%].index')->with('status', $request->input('title') . ' successfully created!');
+    }
+
+    /**
+     * Edit a [%crud_space%].
+     *
+     * @param \[%models_namespace%][%Crud%] $[%crud_var%]
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function edit([%Crud%] $[%crud_var%]) {
+        return view('[%crud_underscore%].edit', compact('[%crud_var%]'));
+    }
+
+    /**
+     * Update a [%crud_space%].
+     *
+     * @param \[%models_namespace%][%Crud%] $[%crud_var%]
+     * @return $this
+     */
+    public function update(Request $request, [%Crud%] $[%crud_var%]) {
+
+        // Do some validation.
+        $validation = $request->validate($this->_validationRules());
+        if (! $validation) {
+
+            // Return to the crud form with errors.
+            return redirect()->back()->withErrors();
+        }
+
+        // Update this [%crud_space%].
+        $[%crud_var%]->update($request->all());
+
+        // Set a confirmation message.
+        return redirect()->route('[%crud_dash%].index')->with('success_message', $[%crud_var%]->title . ' successfully updated!');
+    }
+
+    /**
+     * Delete a [%crud_space%].
+     *
+     * @param \[%models_namespace%][%Crud%] $[%crud_var%]
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function destroy([%Crud%] $[%crud_var%]) {
+        $[%crud_var%]->delete();
+
+        // Set conformation message and return to the index.
+        return redirect()->route('[%crud_dash%].index')->with('success_message', $[%crud_var%]->title . ' successfully deleted!');
+    }
+
+    /**
+     * Form validation rules to create or edit a [%crud_space%].
+     *
+     * @return array
+     */
+    private function _validationRules() {
+        return [
+            'title' => 'required',
+        ];
+    }
+}
