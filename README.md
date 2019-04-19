@@ -1,9 +1,8 @@
-[![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=An%20intelligent%20code%20generator%20for%20Laravel%20framework%20which%20will%20save%20you%20lots%20of%20time!&url=https://github.com/CrestApps/laravel-code-generator&hashtags=laravel,laravel-code-generator,laravel-crud,code-generator,crud-generator,laravel-crud-generator)
 
 ## Introduction
 
 With just one cli command you can create a crud (with only a title field) controller, model, migration, view templates and add a entry in routes/web.php.
-This is just a tool to create some starter templates, **not** a crud creater such as Laravel Voyager or CrudBooster.
+This is just a tool to create some starter templates, **not** a crud generator such as Laravel Voyager or CrudBooster.
 
 ### Requirements
 Laravel 5.5 or higher
