@@ -1,7 +1,7 @@
 {
     "name": "mvd81/laravel-crud-starter",
     "description": "Creates crud starter templates (controller, model, migration and view files) with just the title. Also add a resource entry in routes/web.php for the crud",
-    "keywords": ["Laravel", "Laravel crud", "Laravel starters templates", "Laravel boiler template's"],
+    "keywords": ["Laravel", "Laravel crud", "Laravel starters templates", "Laravel boiler templates"],
     "license": "mit",
     "authors": [
         {
