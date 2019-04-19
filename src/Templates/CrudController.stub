@@ -13,7 +13,7 @@ class [%Crud%]Controller extends Controller {
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index() {
-        $[%crud_var%]s = [%Crud%]::paginate(25);
+        $[%crud_var%]s = [%Crud%]::orderBy('id', 'desc')->paginate(25);
 
         return view('[%crud_underscore%].index', compact('[%crud_var%]s'));
     }
@@ -21,7 +21,7 @@ class [%Crud%]Controller extends Controller {
     /**
      * Show a [%crud_space%] item.
      *
-     * @param \[%models_namespace%][%Crud%] $[%crud_var%]
+     * @param \[%models_namespace%]\[%Crud%] $[%crud_var%]
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function show([%Crud%] $[%crud_var%]) {
@@ -58,13 +58,13 @@ class [%Crud%]Controller extends Controller {
         $[%crud_var%]->save();
 
         // Set a confirmation message and return to the overview.
-        return redirect()->route('[%crud_dash%].index')->with('status', $request->input('title') . ' successfully created!');
+        return redirect()->route('[%crud_dash%].index')->with('success_message', '<em>' . $request->input('title') . '</em> successfully created!');
     }
 
     /**
      * Edit a [%crud_space%].
      *
-     * @param \[%models_namespace%][%Crud%] $[%crud_var%]
+     * @param \[%models_namespace%]\[%Crud%] $[%crud_var%]
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit([%Crud%] $[%crud_var%]) {
@@ -74,7 +74,7 @@ class [%Crud%]Controller extends Controller {
     /**
      * Update a [%crud_space%].
      *
-     * @param \[%models_namespace%][%Crud%] $[%crud_var%]
+     * @param \[%models_namespace%]\[%Crud%] $[%crud_var%]
      * @return $this
      */
     public function update(Request $request, [%Crud%] $[%crud_var%]) {
@@ -91,20 +91,20 @@ class [%Crud%]Controller extends Controller {
         $[%crud_var%]->update($request->all());
 
         // Set a confirmation message.
-        return redirect()->route('[%crud_dash%].index')->with('success_message', $[%crud_var%]->title . ' successfully updated!');
+        return redirect()->route('[%crud_dash%].index')->with('success_message', '<em>' . $[%crud_var%]->title . '</em> successfully updated!');
     }
 
     /**
      * Delete a [%crud_space%].
      *
-     * @param \[%models_namespace%][%Crud%] $[%crud_var%]
+     * @param \[%models_namespace%]\[%Crud%] $[%crud_var%]
      * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy([%Crud%] $[%crud_var%]) {
         $[%crud_var%]->delete();
 
         // Set conformation message and return to the index.
-        return redirect()->route('[%crud_dash%].index')->with('success_message', $[%crud_var%]->title . ' successfully deleted!');
+        return redirect()->route('[%crud_dash%].index')->with('success_message', '<em>' . $[%crud_var%]->title . '</em> successfully deleted!');
     }
 
     /**
