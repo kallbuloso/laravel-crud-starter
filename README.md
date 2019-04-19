@@ -15,7 +15,7 @@ Laravel 5.5 or higher
 	composer require mvd81/laravel-crud-starter --dev
 	````
 
-2. **Configuration, open the condif file: */config/crud_starter.php***
+2. **Configuration, open the config file: */config/crud_starter.php***
 
 	Name space for your models.
 	````
