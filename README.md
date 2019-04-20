@@ -31,6 +31,11 @@ Laravel 5.5 or higher
     ````
     'crud_middleware' => 'auth',
     ````
+    
+    Route prefix (leave empty for no prefix)
+	````
+	'route_prefix' => 'admin',
+	````
     	
 	Location to extend the view app.
 	````

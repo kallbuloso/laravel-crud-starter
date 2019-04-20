@@ -162,8 +162,14 @@ class Createcrud extends Command{
      */
     protected function createRoute($name) {
 
+        // Check if the route need a prefix.
+        $routePrefix = '';
+        if ($routePrefix = config('crud_starter.route_prefix', false)) {
+            $routePrefix = strtolower($routePrefix) . '/';
+        }
+
         // Create the resource route.
-        $addRoute = "\rRoute::resource('" . strtolower($this->camelCaseToDash($name)) . "', '" . $name . "Controller')";
+        $addRoute = "\rRoute::resource('" . $routePrefix . strtolower($this->camelCaseToDash($name)) . "', '" . $name . "Controller')";
 
         // Check if we need to add middleware to this route.
         if ($middleware = config('crud_starter.crud_middleware', false)) {
@@ -172,6 +178,9 @@ class Createcrud extends Command{
             }
             $addRoute .= "->middleware(" . "'" . str_replace(",", "','", $middleware) . "'" . ")";
         }
+
+
+        // Close route function.
         $addRoute .=";";
 
         // Add the routes to the file.
